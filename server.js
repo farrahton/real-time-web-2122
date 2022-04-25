@@ -8,7 +8,7 @@ const port = process.env.PORT || 4242
 app.use(express.static(path.resolve('public')))
 
 io.on('connection', (socket) => {
-    console.log('made a connection')
+    // console.log('made a connection')
     socket.on('stateUpdate', function (player) {
         // console.log('got state update', player)
         io.sockets.emit('stateUpdateForwardedByServer', player)
