@@ -29,8 +29,6 @@ io.on('connection', (socket) => {
         // console.log(clickCards)
     })
 
-
-
     socket.on('clickCard', card => {
         io.emit("clickCard", card)
     })
