@@ -6,58 +6,148 @@ const content = document.querySelectorAll('.content')
 const container = document.querySelector('main')
 const score = document.querySelector('span')
 
+socket.emit('create', 'room')
 
-clicking()
+socket.on("showCards", function () {
+    // to shuffle the cards
+    // card.forEach(c => {
+    //     const num = [...Array(card.length).keys()]
+    //     const random = Math.floor(Math.random() * card.length)
 
-// to shuffle the cards on every reload
-card.forEach(c => {
-    const num = [...Array(card.length).keys()]
-    const random = Math.floor(Math.random() * card.length)
-
-    c.style.order = num[random]
+    //     c.style.order = num[random]
+    // })
+    showCardsAtFirst()
+    clicking()
 })
+// console.log('works')
+// socket.emit('flippedTwoCards', "hallo")
 
+// socket.emit('test', "Lisanne")
+// showCardsAtFirst()
+// click()
 
-function clicking() {
-    for (let i = 0; i < card.length; i++) {
+// card.forEach(turn => {
+//     clicking()
+// })
+// 
+// clicking()
+
+function showCardsAtFirst() {
+    for (let i = 0; i < content.length; i++) {
+        // show the cards a few seconds before
         content[i].classList.add('show')
 
-        // show the cards a few seconds before they turn around
+        // after 2 seconds they turn back around
         setInterval(() => {
             content[i].classList.remove('show')
         }, 2000);
-
-        card[i].addEventListener('click', () => {
+    }
+}
+// when you click on any of the cards from the array it flips
+function clicking() {
+    for (let i = 0; i < content.length; i++) {
+        content[i].addEventListener('click', () => {
             content[i].classList.add('flip')
 
-            const filppedCard = document.querySelectorAll('.flip')
+            socket.emit("clickCard", i)
 
-            if (filppedCard.length == 2) {
+            const flippedCard = document.querySelectorAll('.flip')
+
+            //  limit to amount of cards you can flip
+            if (flippedCard.length == 2) {
+                // socket.emit('flippedTwoCards', true)
+
+                // // then you're not allowed to do anything with your mouse
                 container.style.pointerEvents = 'none'
-                setInterval(() => {
-                    container.style.pointerEvents = 'all'
-                }, 1000);
-                match(filppedCard[0], filppedCard[1])
+
+                // // after 1 second you're allowed to again
+                // setInterval(() => {
+                //     container.style.pointerEvents = 'all'
+                // }, 1000);
+
+                match(flippedCard[0], flippedCard[1])
+                // socket.emit('userTurnIsOver')
             }
         })
     }
 }
 
+
 function match(cardOne, cardTwo) {
 
+    // if the data indexes match then 
     if (cardOne.dataset.index == cardTwo.dataset.index) {
-        // add one to the score
+        // add one point to the score
         score.innerHTML = parseInt(score.innerHTML) + 1
 
         cardOne.classList.remove('flip')
         cardTwo.classList.remove('flip')
 
+        // and keep showing the matched cards
         cardOne.classList.add('match')
         cardTwo.classList.add('match')
+
+        // after a second you can do things with your mouse again
+        // setInterval(() => {
+        //     container.style.pointerEvents = 'all'
+        // }, 1000);
     } else {
+        // socket.emit('flippedTwoCards', true)
+        // if the cards do not match then you're not allowed to do anything with your mouse
+        // container.style.pointerEvents = 'none'
+
         setTimeout(() => {
             cardOne.classList.remove('flip')
             cardTwo.classList.remove('flip')
         }, 1000);
     }
 }
+
+// socket.on('flippedTwoCards', flippedTwoCards => {
+//     console.log(flippedTwoCards)
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+// function clicking() {
+//     for (let i = 0; i < card.length; i++) {
+//         // show the cards a few seconds before
+//         content[i].classList.add('show')
+
+//         // after 2 seconds they turn back around
+//         setInterval(() => {
+//             content[i].classList.remove('show')
+//         }, 2000);
+
+//         // when you click on any of the cards from the array it flips
+//         card[i].addEventListener('click', () => {
+//             content[i].classList.add('flip')
+
+//             const filppedCard = document.querySelectorAll('.flip')
+
+//             //  limit to amount of cards you can flip
+//             if (filppedCard.length == 2) {
+//                 // socket.emit('flippedTwoCards', true)
+
+//                 // // then you're not allowed to do anything with your mouse
+//                 // container.style.pointerEvents = 'none'
+
+//                 // // after 1 second you're allowed to again
+//                 // setInterval(() => {
+//                 //     container.style.pointerEvents = 'all'
+//                 // }, 1000);
+
+//                 match(filppedCard[0], filppedCard[1])
+//             }
+//         })
+//     }
+// }

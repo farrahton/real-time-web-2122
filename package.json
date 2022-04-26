@@ -5,13 +5,13 @@
     "fetch": "^1.1.0",
     "node": "^17.7.2",
     "node-fetch": "^3.2.3",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
   },
   "scripts": {
     "server": "start",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   }
 }

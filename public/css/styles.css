@@ -50,6 +50,7 @@ main {
 .card article {
     /* height: 130px; */
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /* .card {
@@ -203,8 +204,6 @@ img {
     transform: rotateY(180deg);
 }
 
-
-/* deze werkt niet */
 .show {
     transform: rotateY(180deg);
     transition: transform 0.5s;
