@@ -6,28 +6,41 @@ const content = document.querySelectorAll('.content')
 const container = document.querySelector('main')
 const score = document.querySelector('span')
 
-// to shuffle the cards
-// card.forEach(c => {
-//     const num = [...Array(card.length).keys()]
-//     const random = Math.floor(Math.random() * card.length)
+// to shuffle the cards beforehand 
+card.forEach(c => {
+    const num = [...Array(card.length).keys()]
+    const random = Math.floor(Math.random() * card.length)
 
-//     c.style.order = num[random]
-// })
+    c.style.order = num[random]
+})
 
+//  create room
 socket.emit('create', 'room')
 
 socket.on("showCards", function () {
     showCardsAtFirst()
+    // card.forEach(turn => {
     clicking()
+    // })
 })
 
+// so you can see the cards that the other person turned around
 socket.on("clickCard", card => {
     content[card].classList.add('flip')
 })
 
+//   socket.on('cardsScore', (cardsScore) => {
+//         users[socket.id].score = cardsScore;
+//         io.emit('cardsScore', users)
+//     })
+
 // socket.on("addScore", card => {
 
 // })
+
+
+
+
 // console.log('works')
 // socket.emit('flippedTwoCards', "hallo")
 
@@ -57,16 +70,16 @@ function clicking() {
     for (let i = 0; i < content.length; i++) {
         content[i].addEventListener('click', () => {
             // content[i].classList.add('flip')
-
             socket.emit("clickCard", i)
 
+            // without the time out it takes too long to see the scoreboard go up
             setTimeout(() => {
                 const flippedCard = document.querySelectorAll('.flip')
 
                 //  limit to amount of cards you can flip
                 if (flippedCard.length == 2) {
 
-                    // // then you're not allowed to do anything with your mouse
+                    // then you're not allowed to do anything with your mouse anymore
                     container.style.pointerEvents = 'none'
 
                     // // after 1 second you're allowed to again
@@ -105,7 +118,6 @@ function match(cardOne, cardTwo) {
         //     container.style.pointerEvents = 'all'
         // }, 1000);
     } else {
-        // socket.emit('flippedTwoCards', true)
         // if the cards do not match then you're not allowed to do anything with your mouse
         container.style.pointerEvents = 'none'
 

@@ -14,10 +14,21 @@ app.use(express.static(path.resolve('public')))
 // app.get('/', (request, response) => {
 //     response.render('index')
 // })
-
+// var users = {};
 
 io.on('connection', (socket) => {
-    console.log('made a connection')
+    // console.log('made a connection' + socket.id)
+    // users[socket.id] = { score: "0", username: "0" }
+
+    // socket.on('cardsScore', (cardsScore) => {
+    //     users[socket.id].score = cardsScore;
+    //     io.emit('cardsScore', users)
+    // })
+
+    // socket.on('username', (username) => {
+    //     users[socket.id].username = username;
+    //     io.emit('username', username)
+    // })
 
     socket.on('create', function (room) {
         socket.join(room)
