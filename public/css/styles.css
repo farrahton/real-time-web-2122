@@ -7,6 +7,7 @@
 body {
     background-image: url(/img/background.jpeg);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    overflow: hidden;
 }
 
 header {
@@ -17,7 +18,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 5em;
+    margin-bottom: .5em;
     /* font-family: "Orbitron", sans-serif; */
     color: black;
     background-color: white;
@@ -36,18 +37,18 @@ span {
 }
 
 main {
-    max-width: 960px;
+    max-width: 60em;
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     gap: 1rem;
     margin: auto;
-    padding: 20px;
+    padding: 1em;
     justify-content: space-evenly;
     /* position: absolute; */
 }
 
 img {
-    height: auto;
+    height: 17em;
     width: 100%;
     /* position: relative; */
 }
@@ -55,7 +56,7 @@ img {
 .card {
     position: relative;
     width: 12em;
-    height: 19em;
+    height: 17em;
     perspective: 500px;
 }
 
@@ -101,18 +102,30 @@ img {
     transition: transform 0.5s;
 }
 
-/* 
 
-@media screen and (min-width: 770px) {
+
+@media screen and (max-width: 50em) {
+  
+    body {
+        overflow: auto;
+    }
+    
     .head {
         max-width: 100vw;
     }
 
-    .card {
-        grid-template-columns: repeat(5, auto);
+    main {
+        grid-template-columns: repeat(2, auto);
+        height: 1em;
     }
 
-    .content article {
-        height: 170px;
+    /* .content article {
+        height: 1em;
     }
-} */
+
+    .card {
+        height: 1em;
+    }
+     */
+
+}
