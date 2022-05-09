@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'DK Magical Brush';
+    src: url('DKMagicalBrush-Regular.woff2') format('woff2'),
+        url('DKMagicalBrush-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
