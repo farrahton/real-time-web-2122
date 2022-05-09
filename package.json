@@ -1,18 +1,28 @@
 {
-  "dependencies": {
-    "ejs": "^3.1.7",
-    "express": "^4.17.3",
-    "fetch": "^1.1.0",
-    "node": "^17.7.2",
-    "node-fetch": "^3.2.3",
-    "socket.io": "^4.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  },
+  "name": "real-time-web-2122",
+  "version": "1.0.0",
+  "description": "black lives matter memory game",
+  "main": "server.js",
   "scripts": {
     "test": "nodemon server.js",
-    "server": "start",
     "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farrahton/real-time-web-2122.git"
+  },
+  "author": "Farrahton Piers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farrahton/real-time-web-2122/issues"
+  },
+  "homepage": "https://github.com/farrahton/real-time-web-2122#readme",
+  "dependencies": {
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "fetch": "^1.1.0",
+    "node-fetch": "^3.2.4",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.0"
   }
 }
