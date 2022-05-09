@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <!-- <script type="module" src="/js/script.js"></script> -->
+    <script type="module" src="/js/script.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Black Lives Matter Memory Game</title>
+</head>
+
+<body>
+
+    <header>
+        <section> 
+            <a href="/facts"> 
+                <img src="/img/learnmore.png">
+                <p>Black history feitjes</p>
+            </a>
+        </section>
+        <section> 
+            <h1>t' Betrokken Liefdevolle Mensen </h1>
+            <h2>memory spel</h2>
+        </section>
+        <!-- <p class="playername"> <span class="playerscore">0</span></p> -->
+        <section> 
+            <h3>Spelers</h3>
+            <ul></ul>
+        </section>
+        
+    </header>
+
+    <!-- <button id="next-turn">Next turn</button> -->
+
+    <!-- <button type="button" id="turn" name="button">Next Turn</button> -->
+    <!-- <main>
+        <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+            </div>
+        </div>
+    </main> -->
+
+    <main>
+        <section class="card">
+            <div class="content" data-index="1">
+                <article class="front"><img src="/img/empathie1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="1">
+                <article class="front"><img src="/img/empathie3.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="2">
+                <article class="front"><img src="/img/herstelrecht1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="2">
+                <article class="front"><img src="/img/herstelrecht2.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="3">
+                <article class="front"><img src="/img/diversiteit1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="3">
+                <article class="front"><img src="/img/diversiteit2.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="4">
+                <article class="front"><img src="/img/globalisering1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="4">
+                <article class="front"><img src="/img/globalisering2.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="5">
+                <article class="front"><img src="/img/liefdevollebetrokkenheid1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="5">
+                <article class="front"><img src="/img/liefdevollebetrokkenheid2.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="6">
+                <article class="front"><img src="/img/waarde1.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+        <section class="card">
+            <div class="content" data-index="6">
+                <article class="front"><img src="/img/waarde2.png" alt=""></article>
+                <article class="back"><img src="/img/backside.png" alt=""></article>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
