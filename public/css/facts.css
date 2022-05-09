@@ -1,0 +1,64 @@
+body {
+    background-image: url(https://scholarlykitchen.sspnet.org/wp-content/uploads/2020/06/iStock-1243144818.jpg);
+    width:100%;
+    height: 100%;
+    /* font-family: 'DK Magical Brush'; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color: #c2866f;
+    text-align: center;
+    font-family: 'DK Magical Brush';
+    margin-top: 2em;
+}
+/* 
+main {
+    width: 50vw;
+    height: 70vh;
+    background-color: #f8eb00;
+    color: black;
+    justify-content: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+section {
+    position: relative;
+    top: 10%;
+    text-align: justify;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+blockquote {
+
+    font-size: x-large;
+    font-weight:bold;
+}
+cite {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: small;
+    font-weight:lighter;
+
+}
+ */
+main {
+    max-width:1344px;  
+    /* border:1px solid black; */
+    margin:auto;
+    background:transparant;
+    margin-top:20px;
+}
+
+section {
+    background: #e5d5cd;
+    width:9 0%;
+    padding: 2em;
+    margin: 2em;
+    border: 4px dashed #684d34;
+    display: inline-block;
+    border-radius: 5px;
+    
+  }
+  
