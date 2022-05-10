@@ -53,9 +53,9 @@ io.on('connection', (socket) => {
         // voeg de prompt playername, socket id en de startscore aan de array toe
         onlinePlayers.push([playerName, socket.id, 0])
          // emit de prompt playername, socket id en de startscore
+        
         io.emit("onlinePlayers", onlinePlayers)
-
-        io.emit("activePlayer", onlinePlayers[counter][0])
+        io.emit("activePlayer", onlinePlayers[counter][1])
     })
 
     socket.on("turn", () => {
@@ -69,9 +69,9 @@ io.on('connection', (socket) => {
             counter = 0
         }
         // console.log(counter)
-        console.log(onlinePlayers[counter])
+        console.log('De beurt is aan:', onlinePlayers[counter][1])
          // benoem de [0] alvast server side, zodat je minder dataverkeer hebt
-        io.emit("activePlayer", onlinePlayers[counter][0])
+        io.emit("activePlayer", onlinePlayers[counter][1])
     })
     
     // zodat je de geklikte kaart op allebei de players hun scherm ziet
@@ -91,16 +91,12 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        // console.log('user disconnected')
-        // removed disconnecter player from list when you refresh
-        // onlinePlayers.splice(onlinePlayers.indexOf(socket),1);
-        // remove disconnected players from list of online players! 
-        // onlinePlayers.forEach((onlinePlayer, index) => {
-        //     if (onlinePlayer[1] == socket.id) {
-        //         onlinePlayers.splice(index, 1)
-        //     }
-        // })
-        // io.emit
+        console.log('user disconnected')
+
+        // Zoek de index in onlinePlayers voor onlinePlayers[index][1] waar de socket van deze player in staat
+        let index = onlinePlayers.findIndex((player) => { return player[1] === socket.id })
+        onlinePlayers.splice(onlinePlayers.indexOf(index), 1)
+        console.log('Aantal spelers: ', onlinePlayers.length)
     })
 })
 

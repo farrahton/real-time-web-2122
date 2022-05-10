@@ -1,5 +1,5 @@
 let socket = io()
-let magSpelen = false;
+let clickedCards = 0
 
 // require("dotenv").config()
 
@@ -21,21 +21,29 @@ card.forEach(c => {
 let playerName = prompt("what's your name?", "John Doe")
 socket.emit("player", playerName)
 
-// voer de functie uit zodat de player even de kaartjes te zien krijgt 
-showCardsAtFirst()
-function showCardsAtFirst() {
-    for (let i = 0; i < content.length; i++) {
-        // show the cards a few seconds before
-        content[i].classList.add('show')
-
-        // after 2 seconds they turn back around
-        setInterval(() => {
-            content[i].classList.remove('show')
-        }, 2000);
-    }
+ // Koppel de event listeners aan de kaarten
+ for (let i = 0; i < content.length; i++) {
+    card[i].addEventListener('click', (event) => {
+        console.log('Kaart aangeklikt: ', event.target)
+        socket.emit("clickCard", i)
+        clickedCards++
+        
+        if (clickedCards > 1) {
+            container.style.pointerEvents = 'none'
+            socket.emit("turn")
+            clickedCards = 0
+        }
+    })
 }
 
+// voer de functie uit zodat de player even de kaartjes te zien krijgt 
+showCardsAtFirst()
+
+
+// Koppel de game logica aan sockets
+
 socket.on("onlinePlayers", (onlinePlayers) => {
+    console.log(onlinePlayers)
     // lege lijst van players die momenteel online zijn
     document.querySelector("ul").innerHTML = ""
 
@@ -53,6 +61,19 @@ socket.on("onlinePlayers", (onlinePlayers) => {
 // de flip animatie op de kaart wordt aan alle online players getoond
 socket.on("clickCard", card => {
     content[card].classList.add('flip')
+    console.log("Kaart omgedraaid in clickCard:", content[card])
+    const flippedCard = document.querySelectorAll('.flip')
+    console.log("Aantal elementen met .flip: ", flippedCard.length)
+
+    // we willen alleen de lengte van de geflipte kaarten weten
+    if (flippedCard.length == 2) {
+        // zodra de lengte 2 is, dan mag je niets meer met je muis doen in het gebied van de kaarten
+        // en wordt de match functie uitgevoerd op de twee kaarten
+        match(flippedCard[0], flippedCard[1])
+        // de volgende player in de array krijgt de beurt
+        // socket.emit("turn")
+    }
+    //check of dit de 2e kaart is en er een match is..
 })
 
 // keuze om op de knop te klikken om de beurt te geven aan de volgende player in de array
@@ -65,50 +86,22 @@ socket.on("activePlayer", (activePlayer) => {
     // console.log("playerName: " + playerName)
     // console.log("activeplayer: " + activePlayer)
     // console.log("activePlayer == playerName: " + (activePlayer == playerName))
-    if (activePlayer == playerName) {
+    if (activePlayer == socket.id) {
         console.log("Het is jouw beurt!")
-        magSpelen = true;
-
         container.style.pointerEvents = 'all'
-        
-        for (let i = 0; i < content.length; i++) {
-            card[i].addEventListener('click', () => {
-                console.log("Test")
-                // content[i].classList.add('flip')
-                socket.emit("clickCard", i)
-    
-                // zonder de tijd duurde het te lang voor de score en kan je er opeens 3 aanklikken?
-                setTimeout(() => {
-                    const flippedCard = document.querySelectorAll('.flip')
-    
-                    // we willen alleen de lengte van de geflipte kaarten weten
-                    if (flippedCard.length == 2) {
-                        // zodra de lengte 2 is, dan mag je niets meer met je muis doen in het gebied van de kaarten
-                        container.style.pointerEvents = 'none'
-                        // en wordt de match functie uitgevoerd op de twee kaarten
-                        match(flippedCard[0], flippedCard[1])
-                        // de volgende player in de array krijgt de beurt
-                        socket.emit("turn")
-                    }
-                }, 500)
-            })
-        }
 
     } else {
-        magSpelen = false;
         // als je niet aan de beurt bent mag je niets met je muis doen in het gebied van de kaartjes
-        container.style.pointerEvents = 'none'
         console.log("Jij mag nog geen kaarten omdraaien..");
-         // de volgende player in de array krijgt de beurt na 10 seconden dan switcht ie wel, maar pakt ie de length ==2 niet?
-        //  setTimeout(() => {
-        //   socket.emit("turn")
-    // }, 10000)
+        container.style.pointerEvents = 'none'
     }
 })
 
 
 
 function match(cardOne, cardTwo) {
+    const flippedCard = document.querySelectorAll('.flip')
+
     // als de data-index matcht van de twee omgedraaide kaarten dan
     console.log(cardOne, cardTwo);
     if (cardOne.dataset.index == cardTwo.dataset.index) {
@@ -119,8 +112,7 @@ function match(cardOne, cardTwo) {
         // console.log(playerScore)
 
         // haal de flip class ervanaf
-        cardOne.classList.remove('flip')
-        cardTwo.classList.remove('flip')
+        flippedCard.forEach(card => { card.classList.remove('flip') })
 
         // en voeg match toe om hem omgedraaid in beeld te laten 
         cardOne.classList.add('match')
@@ -128,8 +120,7 @@ function match(cardOne, cardTwo) {
     } else {
         // als de kaarten niet matchen halen we de flip animatie ervanaf om weer de achterkant van de kaarten te zien na 1 seconde
         setTimeout(() => {
-            cardOne.classList.remove('flip')
-            cardTwo.classList.remove('flip')
+            flippedCard.forEach(card => { card.classList.remove('flip') })
         }, 1000);
     }
 }
@@ -154,4 +145,14 @@ function match(cardOne, cardTwo) {
 // 	.then(response => console.log(response))
 // 	.catch(err => console.error(err));
 
+function showCardsAtFirst() {
+    for (let i = 0; i < content.length; i++) {
+        // show the cards a few seconds before
+        content[i].classList.add('show')
 
+        // after 2 seconds they turn back around
+        setInterval(() => {
+            content[i].classList.remove('show')
+        }, 2000);
+    }
+}
