@@ -7,8 +7,6 @@ const card = document.querySelectorAll('.card')
 const front = document.querySelectorAll('.front')
 const content = document.querySelectorAll('.content')
 const container = document.querySelector('main')
-const score = document.querySelector('span')
-
 
 // shuffle de kaarten voorafgaand het spel
 card.forEach(c => {
@@ -48,9 +46,9 @@ socket.on("onlinePlayers", (onlinePlayers) => {
     document.querySelector("ul").innerHTML = ""
 
     onlinePlayers.forEach((onlinePlayer) => {
-        // voeg de player (nummer 0 van de array) toe aan de lijst in html en geef die een startscore (nummer 2 in de array) van 0
+        // voeg de player (nummer 0 van de array) toe aan de lijst in html
         document.querySelector("ul").appendChild(Object.assign(document.createElement("li"), {
-            innerHTML: `${onlinePlayer[0]} <span id="playersscore">${onlinePlayer[2]}</span>`
+            innerHTML: `${onlinePlayer[0]}`
         }))
          // even scrollen als de lijst te lang wordt
          document.querySelector("ul").scrollTop = document.querySelector("ul").scrollHeight
@@ -105,12 +103,6 @@ function match(cardOne, cardTwo) {
     // als de data-index matcht van de twee omgedraaide kaarten dan
     console.log(cardOne, cardTwo);
     if (cardOne.dataset.index == cardTwo.dataset.index) {
-        // 1 punt toevoegen aan scoreboard 
-        // playersscore.innerHTML = parseInt(playersscore.innerHTML) + 1
-         // 1 punt toevoegen aan score van player
-        socket.emit("playerScore")
-        // console.log(playerScore)
-
         // haal de flip class ervanaf
         flippedCard.forEach(card => { card.classList.remove('flip') })
 
@@ -124,26 +116,6 @@ function match(cardOne, cardTwo) {
         }, 1000);
     }
 }
-
-// socket.on("playerScore", playersscore => {
-//     playersscore.innerHTML = parseInt(playersscore.innerHTML) + 1
-
-// })
-
-// const APIKEY = process.env.API_KEY
-
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Host': 'healthruwords.p.rapidapi.com',
-// 		'X-RapidAPI-Key': '${APIKEY}'
-// 	}
-// };
-
-// fetch('https://healthruwords.p.rapidapi.com/v1/quotes/?t=Wisdom&maxR=1&size=medium&id=731', options)
-// 	.then(response => response.json())
-// 	.then(response => console.log(response))
-// 	.catch(err => console.error(err));
 
 function showCardsAtFirst() {
     for (let i = 0; i < content.length; i++) {

@@ -50,9 +50,9 @@ let counter = 0
 
 io.on('connection', (socket) => {
     socket.on("player", (playerName) => {
-        // voeg de prompt playername, socket id en de startscore aan de array toe
-        onlinePlayers.push([playerName, socket.id, 0])
-         // emit de prompt playername, socket id en de startscore
+        // voeg de prompt playername, socket id aan de array toe
+        onlinePlayers.push([playerName, socket.id])
+         // emit de prompt playername, socket id
         
         io.emit("onlinePlayers", onlinePlayers)
         io.emit("activePlayer", onlinePlayers[counter][1])
@@ -77,17 +77,6 @@ io.on('connection', (socket) => {
     // zodat je de geklikte kaart op allebei de players hun scherm ziet
     socket.on('clickCard', card => {
         io.emit("clickCard", card)
-    })
-
-
-    socket.on("playerScore", () => {
-    //     onlinePlayers.forEach((onlinePlayer, index) => {
-    
-    //         if (onlinePlayer[0] == socket.id) {
-    //             onlinePlayers[index][1]++
-    //         }
-    // })
-        io.emit("playerScore")
     })
 
     socket.on('disconnect', () => {
