@@ -20,9 +20,27 @@ app.get('/', function (req, res) {
 // route voor de facts 
 app.get('/facts', async (req, res) => {
     res.render('facts')
+    // fetch("https://black-history-month-api.herokuapp.com/people")
+    // .then(function(response) {
+    //   return response.json();
+    // })
+    // .then(function(data) {
+    //   var data = data[Math.floor(Math.random()*data.length)];
+      
+    //   console.log(data);
+      // data[288]
+      // console.log(data[288]);
+    //   res.render('facts', {
+        // data: data.description
+    //   })
+    // })
+    // en dan in ejs :  <!-- <% data((facts)=> { %>
+            //     <blockquote> 
+            //     <%= facts.description %> 
+            // </blockquote> 
+            //  <% }) %> -->
 })
 
-  
 let onlinePlayers = []
 // let activePlayer = "" 
 
@@ -41,20 +59,22 @@ io.on('connection', (socket) => {
     })
 
     socket.on("turn", () => {
-        // als counter er 1 bij heeft moet het minder dan of gelijk zijn aan de lengte van de array
+        // als we er 1 aan toevoegen past het dan? dan mag je er 1 aan toevoegen
+        // lengte begint bij 1 daarom - 1 we willen dat ie bij 0 begint, omdat eerste in de lijst index 0 heeft
         if (counter + 1 <= onlinePlayers.length - 1) {
+            // voegt 1 toe aan de index
             counter++
         } else {
+            // anders mag je hem er niet aan toevoegen
             counter = 0
         }
-
         // console.log(counter)
-
         console.log(onlinePlayers[counter])
-         // put the [0] on server side already, zodat je minder dataverkeer hebt
+         // benoem de [0] alvast server side, zodat je minder dataverkeer hebt
         io.emit("activePlayer", onlinePlayers[counter][0])
     })
     
+    // zodat je de geklikte kaart op allebei de players hun scherm ziet
     socket.on('clickCard', card => {
         io.emit("clickCard", card)
     })
