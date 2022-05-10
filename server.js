@@ -4,7 +4,7 @@ const http = require('http').createServer(app)
 const path = require('path')
 const io = require('socket.io')(http)
 const port = process.env.PORT || 4500
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+// const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 app.use(express.static(path.resolve('public')))
 
