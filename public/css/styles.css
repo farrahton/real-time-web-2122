@@ -26,9 +26,9 @@ header {
 
 header section {
     display: flex;
-    gap: 1em;
-    margin-left: 11em;
-    margin-right: 10em;
+    /* gap: 1em; */
+    /* margin-left: 11em; */
+    /* margin-right: 10em; */
     padding-bottom: 1em;
 }
 
@@ -42,12 +42,16 @@ header img {
 header section:nth-of-type(1) p {
     font-size: .9em;
     text-align: center;
-    transform: scale(1.1);
-}
+    word-break: break-word;transform: scale(1.1);
+width: 7em;}
 
 a {
     color: black;
     text-decoration: none;
+    /* transform: scale(1.1); */
+}
+
+a:hover {
     transform: scale(1.1);
 }
 
@@ -67,24 +71,24 @@ h2 {
 
 header section:nth-of-type(3) {
     height: 15em;
-    justify-content: center;
-    margin: 0;
+    /* justify-content: center; */
+    /* margin: 0; */
     padding-top: 3em;
-    text-align: center;
-}
+    /* align-content: center; */
+display: flex;flex-direction: column;}
 
 h3 {
     line-height: 2em;;
 }
 
 ul {
-    align-items: left;
+    
     height: 6em;
-    justify-content: space-between;
-    list-style: inside;
+    /* justify-content: space-between; */
+    /* list-style: inside; */
     overflow: scroll;
-    padding-top: 0em;
-    position: relative;
+    /* padding-top: 0em; */
+    /* position: relative; */
     width: 8em;
 }
 
@@ -154,8 +158,8 @@ img {
 @media screen and (max-width: 50em) {
        section:nth-of-type(1) {
         padding-bottom: 0.8em;
-        width: 7em;
-    }
+        
+    width: 2em;}
   
     body {
         overflow: auto;
@@ -170,8 +174,6 @@ img {
         padding: 0;
         width: 33vw;
     }
-
-    header 
 
     h1 {
         font-size: 1.2em;
