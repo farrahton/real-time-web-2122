@@ -92,7 +92,7 @@ This array consists of a playerName and a socket.id.
 
 - [ ] Point system
 - [ ] UI stack
-- [ ] cute animations for wrong or correct answer
+- [ ] Cute animations for wrong or correct answer
 
 <strong> Could </strong>
 
