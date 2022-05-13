@@ -5,6 +5,7 @@ const card = document.querySelectorAll('.card')
 const content = document.querySelectorAll('.content')
 const container = document.querySelector('main')
 
+
 // shuffle de kaarten voorafgaand het spel
 card.forEach(c => {
     const num = [...Array(card.length).keys()]
@@ -12,20 +13,27 @@ card.forEach(c => {
     c.style.order = num[random]
 })
 
-// user kan zijn/haar naam intypen
-let playerName = prompt("what's your name?", "John Doe")
+// user kan zijn/haar naam intypen 
+let playerName = prompt("What's your name?", "John Doe")
+// verstuur de playername naar de server
 socket.emit("player", playerName)
 
  // koppel de event listeners aan de kaarten
  for (let i = 0; i < content.length; i++) {
     card[i].addEventListener('click', (event) => {
         console.log('Kaart aangeklikt: ', event.target)
+        // verstuur de clickCard functie naar de server
         socket.emit("clickCard", i)
+        // houdt bij hoeveel kaarten er geklikt zijn
         clickedCards++
         
+        // als er twee kaarten aangeklikt zijn
         if (clickedCards > 1) {
+            // dan mag de huidige player niets meer doen in het gebied van de kaarten
             container.style.pointerEvents = 'none'
+            // stuurt naar de server dat de volgende aan de beurt mag
             socket.emit("turn")
+            // zet het weer op 0 om voor de volgende turn weer te kunnen tellen tot 2 kaarten
             clickedCards = 0
         }
     })
@@ -35,7 +43,7 @@ socket.emit("player", playerName)
 showCardsAtFirst()
 
 socket.on("onlinePlayers", (onlinePlayers) => {
-    console.log(onlinePlayers)
+    // console.log(onlinePlayers)
     // lege lijst van players die momenteel online zijn
     document.querySelector("ul").innerHTML = ""
 
@@ -46,7 +54,6 @@ socket.on("onlinePlayers", (onlinePlayers) => {
         }))
     })
 })
-
 
 // de flip animatie op de kaart wordt aan alle online players getoond
 socket.on("clickCard", card => {

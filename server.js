@@ -39,7 +39,6 @@ app.get('/facts', function (req, res, next){
 })
 
 let onlinePlayers = []
-
 let counter = 0
 
 io.on('connection', (socket) => {
@@ -63,7 +62,7 @@ io.on('connection', (socket) => {
         }
         // console.log(counter)
         // console.log('De beurt is aan:', onlinePlayers[counter][1])
-         // benoem de alvast server side, zodat je minder dataverkeer hebt
+         // benoem alvast server side, zodat je minder dataverkeer hebt
         io.emit('activePlayer', onlinePlayers[counter][1])
     })
     
