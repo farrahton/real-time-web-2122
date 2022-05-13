@@ -77,28 +77,28 @@ This array consists of a playerName and a socket.id.
 
 <strong> Must </strong>
 
-- Use socket.io events
-- Use an API
-- Game logic for a memory game
-  - check amount of cards you clicked
-  - check if the cards are a match or not
-- Pick a playername
-- See online users
-- See when a person disconnects
-- See when other player makes their turn
-- Turn based game
+- [x] Use socket.io events
+- [x] Use an API
+- [x] Game logic for a memory game
+  - [x] check amount of cards you clicked
+  - [x] check if the cards are a match or not
+- [x] Pick a playername
+- [x] See online users
+- [x] See when a person disconnects
+- [x] See when other player makes their turn
+- [x] Turn based game
 
 <strong> Should </strong>
 
-- Point system
-- UI stack
-- cute animations for wrong or correct answer
+- [ ] Point system
+- [ ] UI stack
+- [ ] cute animations for wrong or correct answer
 
 <strong> Could </strong>
 
-- A/multiple different memory card set(s) in the same theme that are used after you have played one round
-- Pop up screen that says if it is your turn or not (that shows a quote from the API)
+- [ ] A/multiple different memory card set(s) in the same theme that are used after you have played one round
+- [ ] Pop up screen that says if it is your turn or not (that shows a quote from the API)
 
 <strong> Would </strong>
 
-- Show the same facts to different users
+- [ ] Show the same facts to different users
