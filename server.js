@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
     socket.on('player', (playerName) => {
         // voeg de prompt playername, socket id aan de array toe
         onlinePlayers.push([playerName, socket.id])
-         // emit de prompt playername, socket id
+         // emit de online players met de prompt playername, socket id
         io.emit('onlinePlayers', onlinePlayers)
         io.emit('activePlayer', onlinePlayers[counter][1])
     })
