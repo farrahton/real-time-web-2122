@@ -54,6 +54,9 @@ $ npm install fetch
 
 # Data life cycle
 
+![image](https://user-images.githubusercontent.com/92303930/168808422-068b17e6-4641-4c99-88b3-0a24c05efe89.jpeg)
+
+
 # Real-time events
 
 - connection
